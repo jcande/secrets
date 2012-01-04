@@ -1,0 +1,5 @@
+This is a quick implementation of Shamir's Secret Sharing scheme (http://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing) I coded up today. It is not optimized, audited, or safe. Don't use it for anything important.
+
+It's still a work in progress. I plan on making it usable outside of GHCi and quicker (damn you prime numbers!). I'm still getting used to Haskell so the style is probably bad. I also need to find out how to use libraries.
+
+Hope someone finds this useful.
