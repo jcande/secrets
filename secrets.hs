@@ -2,8 +2,16 @@
  - I have no idea what I am doing. I haven't audited this in any way. I'm using the built-in rand functions!
  - XXX Do NOT use this for anything serious. -}
 
+module Main( main ) where
+
+import System
 import System.Random
 import Data.List
+
+{- TODO
+	some padding or something
+	parse commandline args (learn getOpt)
+-}
 
 -- Taken from: http://www.haskell.org/haskellwiki/Testing_primality
 -- (eq. to) find2km (2^k * n) = (k,n)
@@ -115,12 +123,16 @@ lagrange p terms = (sum $ map g terms) `mod` p
     l i		= product [f x | (x, _) <- terms, x /= i]
       where
         f x	= (-x) * inverse (i - x) p	-- f = (0-x) / (c-x)
-    inverse 	= fst .: extended_gcd
-      where
-        (.:)	= (.).(.)
+    inverse a 	= fst . extended_gcd a
     extended_gcd a b
       | b == 0		= (1, 0)
       | otherwise	= (t, s - q * t)
         where
           (q, r) = a `divMod` b
           (s, t) = extended_gcd b r
+
+-- -k 3 -n 6 used to create the shares (read d from stdin)
+-- -s 1:12 -s 2:24 -s 3:36 used to restore the secret (or take them from stdin)
+-- note: gotta keep track of p somehow
+main = do
+  mapM_ putStrLn =<< getArgs
